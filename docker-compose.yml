@@ -3,7 +3,7 @@ services:
   backend:
     image: laraedit/laraedit
     ports:
-        - 6000:80
+        - 9000:80
     volumes:
         - .:/var/www/html/app
     links:
@@ -18,4 +18,3 @@ services:
     image: mailhog/mailhog
     ports:
     - 36002:8025
-
