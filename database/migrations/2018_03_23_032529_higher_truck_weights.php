@@ -14,7 +14,8 @@ class HigherTruckWeights extends Migration
   public function up()
   {
     Schema::table('trucks', function ($table) {
-      $table->decimal('weight_capacity', 20, 16)->change();
+      //$table->decimal('weight_capacity', 20, 16)->change();
+      $table->float('weight_capacity', 20, 16)->change();
     });
   }
 
@@ -30,4 +31,3 @@ class HigherTruckWeights extends Migration
     });
   }
 }
-

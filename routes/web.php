@@ -18,6 +18,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// ------------original   -------------------------
 Route::get('/home', 'HomeController@index');
-
 Route::resource('trucks', 'truckController');
+/** testing  */ Route::post('trucks/changeStatus', array('as' => 'changeStatus', 'uses' => 'truckController@changeStatus'));
+
+//  --------testing area    -------------------
+//Route::get('/home', 'truckController@index')
+//Route::get('/home', 'HomeController@index');
