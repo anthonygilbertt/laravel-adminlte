@@ -19,9 +19,11 @@ Route::get('/', function () {
 Auth::routes();
 
 // ------------original   -------------------------
-Route::get('/home', 'HomeController@index');
-Route::resource('trucks', 'truckController');
-/** testing  */ Route::post('trucks/changeStatus', array('as' => 'changeStatus', 'uses' => 'truckController@changeStatus'));
+/** correct  */Route::get('/home', 'HomeController@index');
+/** correct  */Route::resource('trucks', 'truckController');
+ /** correct  */ Route::post('trucks/changeStatus', array('as' => 'changeStatus', 'uses' => 'truckController@changeStatus'));
+
+// doesn't work  :(   Route::post('trucks/addTruck', array('as' => 'addTruck', 'uses' => 'truckController@addTruck'));
 
 //  --------testing area    -------------------
 //Route::get('/home', 'truckController@index')
