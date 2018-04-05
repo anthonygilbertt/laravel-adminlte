@@ -62,7 +62,7 @@
 <body>
   <div class="col-md-8 col-md-offset-2">
     <h2 class="text-center">Manage trucks</h2>
-    <br />
+    <br/>
     <div class="panel panel-default">
       <div class="panel-heading">
         <ul>
@@ -416,7 +416,7 @@
                               id = $(this).data('id');
                               $.ajax({
                                 type: 'POST',
-                                url: "{{ URL::route('changeStatus') }}",
+                                url: "{{ URL::route('trucks.store') }}",
                                 data: {
                                   '_token': $('input[name=_token]').val(),
                                   'id': id
@@ -441,7 +441,7 @@
                               $('.modal-footer').on('click', '.add', function() {
                                 $.ajax({
                                   type: 'POST',
-                                  url:"{{ URL::route('api.trucks.store') }}",
+                                  url:'/api/trucks',
                                   data: {
                                     '_token': $('input[name=_token]').val(),
 
@@ -474,9 +474,9 @@
                                         $('.errorWeightcapacity').removeClass('hidden');
                                         $('.errorWeightcapacity').text(data.errors.weightcapacity);
                                       }
-                                      if (data.errors.gasmileage) {
+                                      if (data.errors.Gasmileage) {
                                         $('.errorGasmileage').removeClass('hidden');
-                                        $('.errorGasmileage').text(data.errors.gasmileage);
+                                        $('.errorGasmileage').text(data.errors.Gasmileage);
                                       }
                                       if (data.errors.make) {
                                         $('.errorMake').removeClass('hidden');
@@ -493,17 +493,8 @@
                                     } else {
                                       toastr.success('Successfully added Truck!', 'Success Alert', {timeOut: 5000});
                                       $('#postTable').append("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.seats + "</td><td>" + data.weightcapacity
-                                      + "</td><td>" + data.gasmileage + "</td><td>" + data.make  + "</td><td>" + data.model   + "</td><td>" + data.year
-                                      + "</td><td class='text-center'><input type='checkbox' class='new_published' data-id='" + data.id + " '></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity +   "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "   'data-model='" + data.model + "  'data-year='" + data.year + "
-                                      '><span  class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + " 'data-model='" + data.model + "   'data-year='" + data.year + "
-                                      '><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "    'data-model='" + data.model + " 'data-year='" + data.year + "
-                                      '><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                                      + "</td><td>" + data.Gasmileage + "</td><td>" + data.make  + "</td><td>" + data.model   + "</td><td>" + data.year
+                                      + "</td><td class='text-center'><input type='checkbox' class='new_published' data-id='" + data.id + " '></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-seats='" + data.seats + "                                      ' data-weightcapacity='" + data.weightcapacity +   "'data-gasmileage='" + data.gasmileage + "                                      ' data-make='" + data.make + "   'data-model='" + data.model + "  'data-year='" + data.year + "                                      '><span  class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-seats='" + data.seats + "                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "                                      ' data-make='" + data.make + " 'data-model='" + data.model + "   'data-year='" + data.year + "                                      '><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-seats='" + data.seats + "                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "                                      ' data-make='" + data.make + "    'data-model='" + data.model + " 'data-year='" + data.year + "                                      '><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
                                       $('.new_published').iCheck({
                                         checkboxClass: 'icheckbox_square-yellow',
                                         radioClass: 'iradio_square-yellow',
@@ -531,28 +522,14 @@
                                       });
                                     }
                                   },
+                                  error:function(error) {
+                                    $('html').html(error.responseText);
+                                  }
                                 });
                               });
 
                               // Show a truck
                               $(document).on('click', '.show-modal', function() {$('.modal-seats ').text('Show'); $('#id_show').val($(this).data('id'));  $('#seats_show').val($(this).data('seats'));$('#weightcapacity_show').val($(this).data('weightcapacity'));$('#gasmileage').val($(this).data('gasmileage'));$('#make_show').val($(this).data('make'));$('#model_show').val($(this).data('model'));$('#year_show').val($(this).data('year'));$('#showModal').modal('show');});
-
-
-                              $('.modal-footer').on('click', '.show', function() {
-                                $.ajax({
-                                  type: 'PUT',
-                                  url:"{{ URL::route('api.trucks.show') }}",
-                                  data: {
-                                    '_token': $('input[name=_token]').val(),
-                                    'id': $("#id_show").val(),
-                                    'seats': $('#seats_show').val(),
-                                    'weightcapacity': $('#weightcapacity_show').val(),
-                                    'gasmileage': $('#gasmileage_show').val(),
-                                    'make': $('#make_show').val(),
-                                    'model': $('#model_show').val(),
-                                    'year': $('#year_show').val()
-                                  },
-                                  success: function(data) {$('.errorSeats').addClass('hidden');$('.errorWeightcapacity').addClass('hidden');$('.errorGasmileage').addClass('hidden');$('.errorMake').addClass('hidden');$('.errorModel').addClass('hidden');$('.errorYear').addClass('hidden');
 
                               // Edit a truck
                               $(document).on('click', '.edit-modal', function() {
@@ -573,7 +550,7 @@
                               $('.modal-footer').on('click', '.edit', function() {
                                 $.ajax({
                                   type: 'PUT',
-                                   url:"{{ URL::route('api.trucks.update') }}",
+                                  url:“{{ route('trucks.update.route') }}”,
                                   data: {
                                     '_token': $('input[name=_token]').val(),
                                     'id': $("#id_edit").val(),
@@ -584,7 +561,7 @@
                                     'model': $('#model_edit').val(),
                                     'year': $('#year_edit').val()
                                   },
-                                  success: function(data) {    $('.errorSeats').addClass('hidden'); $('.errorWeightcapacity').addClass('hidden'); $('.errorGasmileage').addClass('hidden'); $('.errorMake').addClass('hidden');  $('.errorModel').addClass('hidden'); $('.errorYear').addClass('hidden');
+                                  success: function(data) {$('.errorSeats').addClass('hidden'); $('.errorWeightcapacity').addClass('hidden'); $('.errorGasmileage').addClass('hidden'); $('.errorMake').addClass('hidden');  $('.errorModel').addClass('hidden'); $('.errorYear').addClass('hidden');
 
                                     if ((data.errors)) {
                                       setTimeout(function () {
@@ -592,25 +569,25 @@
                                         toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
                                       }, 500);
 
-                                      if (data.errors.seats) {
+                                      if (data.errors.Seats) {
                                         $('.errorSeats').removeClass('hidden');
-                                        $('.errorSeats').text(data.errors.seats);
+                                        $('.errorSeats').text(data.errors.Seats);
                                       }
-                                      if (data.errors.weightcapacity) {
+                                      if (data.errors.Weightcapacity) {
                                         $('.errorWeightcapacity').removeClass('hidden');
-                                        $('.errorWeightcapacity').text(data.errors.weightcapacity);
+                                        $('.errorWeightcapacity').text(data.errors.Weightcapacity);
                                       }
-                                      if (data.errors.gasmileage) {
+                                      if (data.errors.Gasmileage) {
                                         $('.errorGasmileage').removeClass('hidden');
-                                        $('.errorGasmileage').text(data.errors.gasmileage);
+                                        $('.errorGasmileage').text(data.errors.Gasmileage);
                                       }
-                                      if (data.errors.make) {
+                                      if (data.errors.Make) {
                                         $('.errorMake').removeClass('hidden');
-                                        $('.errorMake').text(data.errors.make);
+                                        $('.errorMake').text(data.errors.Make);
                                       }
-                                      if (data.errors.model) {
+                                      if (data.errors.Model) {
                                         $('.errorModel').removeClass('hidden');
-                                        $('.errorModel').text(data.errors.model);
+                                        $('.errorModel').text(data.errors.Model);
                                       }
                                       if (data.errors.year) {
                                         $('.errorYear').removeClass('hidden');
@@ -621,16 +598,7 @@
                                       toastr.success('Successfully updated Truck!', 'Success Alert', {timeOut: 5000});
                                       $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.seats + "</td><td>" + data.weightcapacity + "</td><td>" + data.gasmileage + "</td><td>" + data.make + "</td><td>" + data.model + "</td><td>"
                                       + data.year +
-                                      "</td><td class='text-center'><input type='checkbox' class='edit_published' data-id='" + data.id + "'></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "   'data-model='" + data.model + "
-                                      'data-year='" + data.year + "    '><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "
-                                      ' data-seats='" + data.seats + " ' data-weightcapacity='" + data.weightcapacity + "
-                                      ' data-gasmileage='" + data.gasmileage + "' data-make='" + data.make + "' data-model='" + data.model + "
-                                      ' data-year='" + data.year + "   '><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "' data-model='" + data.model + "' data-year='" + data.year + "
-                                      '><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                                      "</td><td class='text-center'><input type='checkbox' class='edit_published' data-id='" + data.id + "'></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-seats='" + data.seats + "                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "                                      ' data-make='" + data.make + "   'data-model='" + data.model + "                                      'data-year='" + data.year + "    '><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "                                      ' data-seats='" + data.seats + " ' data-weightcapacity='" + data.weightcapacity + "                                      ' data-gasmileage='" + data.gasmileage + "' data-make='" + data.make + "' data-model='" + data.model + "                                      ' data-year='" + data.year + "   '><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-seats='" + data.seats + "                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "                                      ' data-make='" + data.make + "' data-model='" + data.model + "' data-year='" + data.year + "                                      '><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
 
                                       if (data.is_published) {
                                         $('.edit_published').prop('checked', true);

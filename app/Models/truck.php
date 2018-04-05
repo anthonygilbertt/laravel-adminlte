@@ -22,7 +22,7 @@ class truck extends Model
     use SoftDeletes;
 
     public $table = 'trucks';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -34,6 +34,7 @@ class truck extends Model
         'make',
         'model',
         'year'
+        'favorite'
     ];
 
     /**
@@ -48,6 +49,7 @@ class truck extends Model
         'make' => 'string',
         'model' => 'string',
         'year' => 'integer'
+        'favorite'=>'boolean'
     ];
 
     /**
@@ -63,5 +65,5 @@ class truck extends Model
         'year' => 'required'
     ];
 
-    
+
 }
