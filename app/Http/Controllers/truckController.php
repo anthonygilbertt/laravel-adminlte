@@ -1,15 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-
-// from the article
-use Illuminate\Support\Facades\Input;
-
-use Validator;
-use Response;
-use App\Post;
-use View;
-
-// end of article
+namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatetruckRequest;
 use App\Http\Requests\UpdatetruckRequest;
@@ -18,7 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
-
+use Response;
 
 class truckController extends AppBaseController
 {
@@ -40,11 +31,15 @@ class truckController extends AppBaseController
     {
         $this->truckRepository->pushCriteria(new RequestCriteria($request));
         $trucks = $this->truckRepository->all();
+
         //return view('trucks.index')
+
         return view('trucks.index')
             ->with('trucks', $trucks);
+
         //return view('home', ['trucks' =>$trucks]);
     }
+
     /**
      * Show the form for creating a new truck.
      * @return Response
