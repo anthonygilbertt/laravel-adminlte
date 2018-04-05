@@ -528,6 +528,7 @@
                                       });
                                       $('.col1').each(function (index) {
                                         $(this).html(index+1);
+
                                       });
                                     }
                                   },

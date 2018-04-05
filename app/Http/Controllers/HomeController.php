@@ -17,19 +17,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-      /**  Ausins */
-      //   newest     $trucks = Truck::all();
-      //   newest    return view('home', ['trucks' => $trucks]);
+      //  $trucks = Truck::all();
+      //   return view('home', ['trucks' => $trucks]);
       //$trucks = Truck::all();
       //return view('trucks.index',['trucks' => $trucks]);
-
-
-
 
       $trucks = Truck::all();
       return view('home', ['trucks' => $trucks]);
 
-      //  original   ---->   return view('home');
+      //  original   return view('home');
       //return view('home')->with('truck', $truck);
     }
 }

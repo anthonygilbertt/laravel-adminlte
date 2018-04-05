@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function ()
+ {
   return redirect('home');
-});
+ });
 
 
 Auth::routes();
@@ -23,7 +24,7 @@ Auth::routes();
 /** correct  */Route::resource('trucks', 'truckController');
  /** correct  */ Route::post('trucks/changeStatus', array('as' => 'changeStatus', 'uses' => 'truckController@changeStatus'));
 
-// doesn't work  :(   Route::post('trucks/addTruck', array('as' => 'addTruck', 'uses' => 'truckController@addTruck'));
+// Route::post('trucks/addTruck', array('as' => 'addTruck', 'uses' => 'truckController@addTruck'));
 
 //  --------testing area    -------------------
 //Route::get('/home', 'truckController@index')
