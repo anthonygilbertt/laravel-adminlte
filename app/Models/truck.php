@@ -33,9 +33,8 @@ class truck extends Model
         'gas_mileage',
         'make',
         'model',
-        'year'
-        'favorite'
-    ];
+        'year',
+        'favorite',  ];
 
     /**
      * The attributes that should be casted to native types.
@@ -48,8 +47,8 @@ class truck extends Model
         'gas_mileage' => 'float',
         'make' => 'string',
         'model' => 'string',
-        'year' => 'integer'
-        'favorite'=>'boolean'
+        'year' => 'integer',
+        'favorite'=>'boolean',
     ];
 
     /**
@@ -62,6 +61,8 @@ class truck extends Model
         'make' => 'required',
         'model' => 'required',
         'year' => 'required'
+
+        
 
     ];
 

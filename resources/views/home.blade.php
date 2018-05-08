@@ -62,7 +62,7 @@
 <body>
   <div class="col-md-8 col-md-offset-2">
     <h2 class="text-center">Manage trucks</h2>
-    <br />
+  <br>
     <div class="panel panel-default">
       <div class="panel-heading">
         <ul>
