@@ -621,9 +621,18 @@
                                     'gasmileage': $('#gasmileage_show').val(),
                                     'make': $('#make_show').val(),
                                     'model': $('#model_show').val(),
-                                    'year': $('#year_show').val()
+                                    'year': $('#year_show').val(),
                                   },
-                                  success: function(data) {$('.errorSeats').addClass('hidden');$('.errorWeightcapacity').addClass('hidden');$('.errorGasmileage').addClass('hidden');$('.errorMake').addClass('hidden');$('.errorModel').addClass('hidden');$('.errorYear').addClass('hidden');
+                                  success: function(data) {
+                                    $('.errorSeats').addClass('hidden');
+                                    $('.errorWeightcapacity').addClass('hidden');
+                                    $('.errorGasmileage').addClass('hidden');
+                                    $('.errorMake').addClass('hidden');
+                                    $('.errorModel').addClass('hidden');
+                                    $('.errorYear').addClass('hidden');
+                                  },
+                                      });
+                                  });
 
                               // Edit a truck
                               $(document).on('click', '.edit-modal', function() {
