@@ -594,13 +594,25 @@
                               });
 
                               // Show a truck
-                              $(document).on('click', '.show-modal', function() {$('.modal-seats ').text('Show'); $('#id_show').val($(this).data('id'));  $('#seats_show').val($(this).data('seats'));$('#weightcapacity_show').val($(this).data('weightcapacity'));$('#gasmileage').val($(this).data('gasmileage'));$('#make_show').val($(this).data('make'));$('#model_show').val($(this).data('model'));$('#year_show').val($(this).data('year'));$('#showModal').modal('show');});
+                              $(document).on('click', '.show-modal', function() {
+                               $('.modal-seats ').text('Show');
+                               $('#id_show').val($(this).data('id'));
+                               $('#seats_show').val($(this).data('seats'));
+                               $('#weightcapacity_show').val($(this).data('weightcapacity'));
+                               $('#gasmileage_show').val($(this).data('gasmileage'));
+                               $('#make_show').val($(this).data('make'));
+                               $('#model_show').val($(this).data('model'));
+                               $('#year_show').val($(this).data('year'));
+                               $('#showModal').modal('show');
+                             });
+
 
 
                               $('.modal-footer').on('click', '.show', function() {
+                                console.log(window.location.protocol+"/api/trucks/"+$("#id_show").val());
                                 $.ajax({
                                   type: 'PUT',
-                                  url:"{{ URL::route('api.trucks.show') }}",
+                                  url: window.location.protocol+"/api/trucks/"+$("#id_show").val(),
                                   data: {
                                     '_token': $('input[name=_token]').val(),
                                     'id': $("#id_show").val(),
