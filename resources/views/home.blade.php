@@ -120,14 +120,14 @@
                     @if ($truck->favorite) checked @endif></td>
                       <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $truck->updated_at)->diffForHumans() }}</td>
                       <td>
-                        <button class="show-modal btn btn-success" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weightcapacity}}"
-                          data-gasmileage="{{$truck->gasmileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
+                        <button class="show-modal btn btn-success" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weight_capacity}}"
+                          data-gasmileage="{{$truck->gas_mileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
                           <span class="glyphicon glyphicon-eye-open"></span> Show</button>
-                          <button class="edit-modal btn btn-info" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weightcapacity}}"
-                            data-gasmileage="{{$truck->gasmileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
+                          <button class="edit-modal btn btn-info" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weight_capacity}}"
+                            data-gasmileage="{{$truck->gas_mileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
                             <span class="glyphicon glyphicon-edit"></span> Edit</button>
-                            <button class="delete-modal btn btn-danger" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weightcapacity}}"
-                              data-gasmileage="{{$truck->gasmileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
+                            <button class="delete-modal btn btn-danger" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weight_capacity}}"
+                              data-gasmileage="{{$truck->gas_mileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
                               <span class="glyphicon glyphicon-trash"></span> Delete</button>
                             </td>
                           </tr>
