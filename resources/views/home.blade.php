@@ -562,13 +562,17 @@
                                         id = $(this).data('id');
                                         $.ajax({
                                           type: 'POST',
-                                          url: "{{ URL::route('changeStatus') }}",
+                                          url:window.location.protocol+"/trucks/changeStatus",
                                           data: {
                                             '_token': $('input[name=_token]').val(),
                                             'id': id
                                           },
                                           success: function(data) {
                                             // empty
+                                          },
+                                          error: function(data) {
+                                            console.log(data);
+                                            $('html').html(data.responseText);
                                           },
                                         });
                                       });
@@ -577,6 +581,14 @@
 
                                       });
                                     }
+                                  },
+
+
+
+
+                                  error: function(data) {
+                                    console.log(data.responseText);
+                                    // $('html').html(data.responseText);
                                   },
                                 });
                               });
