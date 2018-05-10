@@ -6,18 +6,17 @@ use Illuminate\Database\Migrations\Migration;
 
 class IsFavoriteTruck extends Migration
 {
-  /**
+    /**
   * Run the migrations.
   *
   * @return void
   */
   public function up()
   {
-    Schema::table('users', function($table) {
-      $table->integer('favorite');
+    Schema::table('trucks', function($table) {
+      $table->boolean('favorite')->nullable();
     });
   }
-
   /**
   * Reverse the migrations.
   *
@@ -25,7 +24,7 @@ class IsFavoriteTruck extends Migration
   */
   public function down()
   {
-    Schema::table('users', function($table) {
+    Schema::table('trucks', function($table) {
       $table->dropColumn('favorite');
     });
   }

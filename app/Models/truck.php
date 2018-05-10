@@ -22,7 +22,7 @@ class truck extends Model
     use SoftDeletes;
 
     public $table = 'trucks';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -33,8 +33,8 @@ class truck extends Model
         'gas_mileage',
         'make',
         'model',
-        'year'
-    ];
+        'year',
+        'favorite',  ];
 
     /**
      * The attributes that should be casted to native types.
@@ -47,12 +47,12 @@ class truck extends Model
         'gas_mileage' => 'float',
         'make' => 'string',
         'model' => 'string',
-        'year' => 'integer'
+        'year' => 'integer',
+        'favorite'=>'boolean',
     ];
 
     /**
      * Validation rules
-     *
      * @var array
      */
     public static $rules = [
@@ -61,7 +61,10 @@ class truck extends Model
         'make' => 'required',
         'model' => 'required',
         'year' => 'required'
+
+        
+
     ];
 
-    
+
 }

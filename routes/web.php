@@ -11,13 +11,21 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function ()
+ {
   return redirect('home');
-});
+ });
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// ------------original   -------------------------
+/** correct  */Route::get('/home', 'HomeController@index');
+/** correct  */Route::resource('trucks', 'truckController');
+ /** correct  */ Route::post('trucks/changeStatus', array('as' => 'changeStatus', 'uses' => 'truckController@changeStatus'));
 
-Route::resource('trucks', 'truckController');
+// Route::post('trucks/addTruck', array('as' => 'addTruck', 'uses' => 'truckController@addTruck'));
+
+//  --------testing area    -------------------
+//Route::get('/home', 'truckController@index')
+//Route::get('/home', 'HomeController@index');
