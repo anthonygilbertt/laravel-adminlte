@@ -52,17 +52,34 @@
     vertical-align: baseline;
   }
   /* icheck checkboxes */
-  .iradio_flat-yellow {
-    background: url(https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/yellow.png) no-repeat;
+  .icheckbox_square-yellow {
+    background: url(https://i.pinimg.com/originals/f0/49/f0/f049f04d36f739137c2fcab4bb3905a7.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  .icheckbox_square-yellow.checked {
+    background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Full_Star_Red.svg/64px-Full_Star_Red.svg.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  .icheckbox_square-yellow.hover {
+    background: url(https://i.pinimg.com/originals/f0/49/f0/f049f04d36f739137c2fcab4bb3905a7.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  .icheckbox_square-yellow.checked.hover {
+    background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Full_Star_Red.svg/64px-Full_Star_Red.svg.png) no-repeat;
+    background-position: center;
+    background-size: contain;
   }
   </style>
 
 </head>
 
 <body>
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-12">
     <h2 class="text-center">Manage trucks</h2>
-    <br />
+  <br>
     <div class="panel panel-default">
       <div class="panel-heading">
         <ul>
@@ -94,8 +111,8 @@
                 @if($truck->favorite) warning @endif">
                   <td>{{$truck->id}}</td>
                   <td>{{$truck->seats}}</td>
-                  <td>{{$truck->weightcapacity}}</td>
-                  <td>{{$truck->gasmileage}}</td>
+                  <td>{{$truck->weight_capacity}}</td>
+                  <td>{{$truck->gas_mileage}}</td>
                   <td>{{$truck->make}}</td>
                   <td>{{$truck->model}}</td>
                   <td>{{$truck->year}}</td>
@@ -103,14 +120,14 @@
                     @if ($truck->favorite) checked @endif></td>
                       <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $truck->updated_at)->diffForHumans() }}</td>
                       <td>
-                        <button class="show-modal btn btn-success" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weightcapacity}}"
-                          data-gasmileage="{{$truck->gasmileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
+                        <button class="show-modal btn btn-success" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weight_capacity}}"
+                          data-gasmileage="{{$truck->gas_mileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
                           <span class="glyphicon glyphicon-eye-open"></span> Show</button>
-                          <button class="edit-modal btn btn-info" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weightcapacity}}"
-                            data-gasmileage="{{$truck->gasmileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
+                          <button class="edit-modal btn btn-info" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weight_capacity}}"
+                            data-gasmileage="{{$truck->gas_mileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
                             <span class="glyphicon glyphicon-edit"></span> Edit</button>
-                            <button class="delete-modal btn btn-danger" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weightcapacity}}"
-                              data-gasmileage="{{$truck->gasmileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
+                            <button class="delete-modal btn btn-danger" data-id="{{$truck->id}}" data-seats="{{$truck->seats}}" data-weightcapacity="{{$truck->weight_capacity}}"
+                              data-gasmileage="{{$truck->gas_mileage}}" data-make="{{$truck->make}}" data-model="{{$truck->model}}" data-year="{{$truck->year}}">
                               <span class="glyphicon glyphicon-trash"></span> Delete</button>
                             </td>
                           </tr>
@@ -256,7 +273,8 @@
                     </div>
                   </div>
                 </div>
-
+              </div>
+            </div>
                 {{-- <!-- Modal form to edit a form --> --}}
                 <div id="editModal" class="modal fade" role="dialog">
                   <div class="modal-dialog">
@@ -329,66 +347,71 @@
 
                     <!-- Modal form to delete a form -->
                     <div id="deleteModal" class="modal fade" role="dialog">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">×</button>
-                            <h4 class="modal-seats"></h4>
-                          </div>
-                          <div class="modal-body">
-                            <h3 class="text-center">Are you sure you want to delete the following truck?</h3>
-                            <br />
-                            <form class="form-horizontal" role="form">
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="id">ID:</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="id_delete" disabled>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title">Delete</h4>
                                 </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="seats">Seats:</label>
-                                <div class="col-sm-10">
-                                  <input type="number" class="form-control" id="seats_delete" disabled>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="weightcapacity">Weight Capacity:</label>
-                                <div class="col-sm-10">
-                                  <input type="number" class="form-control" id="weightcapacity_delete" disabled>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="gasmileage">Gas Mileage:</label>
-                                <div class="col-sm-10">
-                                  <input type="number" class="form-control" id="gasmileage_delete" disabled></div>
-                                </div>
-                                <div class="form-group">
-                                  <label class="control-label col-sm-2" for="make">Make:</label>
-                                  <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="make_delete" disabled></div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label class="control-label col-sm-2" for="model">Model:</label>
-                                    <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="model_delete" disabled></div>
+                                <div class="modal-body">
+                                    <h3 class="text-center">Are you sure you want to delete the following post?</h3>
+                                    <br />
+                                    <form class="form-horizontal" role="form">
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="id">ID:</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="id_delete" disabled>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="seats">Seats:</label>
+                                        <div class="col-sm-10">
+                                          <input type="number" class="form-control" id="seats_delete" disabled>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="weightcapacity">Weight Capacity:</label>
+                                        <div class="col-sm-10">
+                                          <input type="number" class="form-control" id="weightcapacity_delete" disabled>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="gasmileage">Gas Mileage:</label>
+                                        <div class="col-sm-10">
+                                          <input type="number" class="form-control" id="gasmileage_delete" disabled>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="make">Make:</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="make_delete" disabled>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="model">Model:</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="model_delete" disabled>
+                                        </div>
+                                      </div>
+                                        <div class="form-group">
+                                          <label class="control-label col-sm-2" for="year">Year:</label>
+                                          <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="year_delete" disabled>
+                                          </div>
+                                        </div>
+                                    </form>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger delete" data-dismiss="modal">
+                                            <span id="" class='glyphicon glyphicon-trash'></span> Delete
+                                        </button>
+                                        <button type="button" class="btn btn-warning" data-dismiss="modal">
+                                            <span class='glyphicon glyphicon-remove'></span> Close
+                                        </button>
                                     </div>
-                                    <div class="form-group">
-                                      <label class="control-label col-sm-2" for="year">Year:</label>
-                                      <div class="col-sm-10"><input type="text" class="form-control" id="year_delete" disabled></div>
-                                    </div>
-                                  </form>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger delete" data-dismiss="modal">
-                                      <span id="" class='glyphicon glyphicon-trash'></span> Delete
-                                    </button>
-                                    <button type="button" class="btn btn-warning" data-dismiss="modal">
-                                      <span class='glyphicon glyphicon-remove'></span> Close
-                                    </button>
-                                  </div>
                                 </div>
-                              </div>
                             </div>
-                          </div>
+                        </div>
+                    </div>
 
                           <!-- jQuery -->
                           <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
@@ -413,16 +436,23 @@
                               increaseArea: '20%'
                             });
                             $('.published').on('ifClicked', function(event){
-                              id = $(this).data('id');
+                              var id = $(this).data('id');
+                              console.log(window.location.protocol+"/trucks/changeStatus");
                               $.ajax({
                                 type: 'POST',
-                                url: "{{ URL::route('changeStatus') }}",
+                                url:window.location.protocol+"/trucks/changeStatus",
                                 data: {
                                   '_token': $('input[name=_token]').val(),
                                   'id': id
                                 },
                                 success: function(data) {
                                   // empty
+                                },
+                                error: function(data) {
+                                  console.log(data);
+                                $('html').html(data.responseText);
+                                },
+                                    });
                                 });
                                 $('.published').on('ifToggled', function(event) {
                                   $(this).closest('tr').toggleClass('warning');
@@ -439,18 +469,20 @@
                                 $('#addModal').modal('show');
                               });
                               $('.modal-footer').on('click', '.add', function() {
+                                console.log("seats: ",$('#seat_add').val());
                                 $.ajax({
                                   type: 'POST',
-                                  url:"{{ URL::route('api.trucks.store') }}",
+                                  url:window.location.protocol+"api/trucks",
                                   data: {
                                     '_token': $('input[name=_token]').val(),
 
-                                    'seats': $('#seats_add').val(),
-                                    'weightcapacity': $('#weightcapacity_add').val(),
-                                    'gasmileage': $('#gasmileage_add').val(),
+                                    'seats': $('#seat_add').val(),
+                                    'weight_capacity': $('#weightcapacity_add').val(),
+                                    'gas_mileage': $('#gasmileage_add').val(),
                                     'make': $('#make_add').val(),
                                     'model': $('#model_add').val(),
                                     'year': $('#year_add').val(),
+                                    'favorite': null,
                                   },
                                   success: function(data) {
                                     $('.errorSeats').addClass('hidden');
@@ -461,10 +493,8 @@
                                     $('.errorYear').addClass('hidden');
 
                                     if ((data.errors)) {
-                                      setTimeout(function () {
                                         $('#addModal').modal('show');
                                         toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
-                                      } 500);
 
                                       if (data.errors.seats) {
                                         $('.errorSeats').removeClass('hidden');
@@ -490,20 +520,36 @@
                                         $('.errorYear').removeClass('hidden');
                                         $('.errorYear').text(data.errors.year);
                                       }
+
+                                      console.log("server error response", data);
+
                                     } else {
+                                      console.log("server response", data);
                                       toastr.success('Successfully added Truck!', 'Success Alert', {timeOut: 5000});
-                                      $('#postTable').append("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.seats + "</td><td>" + data.weightcapacity
-                                      + "</td><td>" + data.gasmileage + "</td><td>" + data.make  + "</td><td>" + data.model   + "</td><td>" + data.year
-                                      + "</td><td class='text-center'><input type='checkbox' class='new_published' data-id='" + data.id + " '></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity +   "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "   'data-model='" + data.model + "  'data-year='" + data.year + "
-                                      '><span  class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + " 'data-model='" + data.model + "   'data-year='" + data.year + "
-                                      '><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "    'data-model='" + data.model + " 'data-year='" + data.year + "
-                                      '><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                                      $('#postTable').append(
+                                        "<tr class='item" + data.id + "'>"+
+                                        "<td>" + data.data.id + "</td>"+
+                                        "<td>" + data.data.seats + "</td>"+
+                                        "<td>" + data.data.weight_capacity+ "</td>"+
+                                        "<td>" + data.data.gas_mileage + "</td>"+
+                                        "<td>" + data.data.make  + "</td>"+
+                                        "<td>" + data.data.model   + "</td>"+
+                                        "<td>" + data.data.year+ "</td>"+
+                                        "<td class='text-center'><input type='checkbox' class='new_published' data-id='" + data.data.id + " '></td>"+
+                                        "<td>Right now</td>"+
+                                        "<td><button class='show-modal btn btn-success' data-id='" + data.data.id + "' data-seats='" + data.data.seats +
+                                        "' data-weightcapacity='" + data.data.weight_capacity +
+                                          "'data-gasmileage='" + data.data.gas_mileage +
+                                        "' data-make='" + data.data.make + "   'data-model='" + data.data.model + "  'data-year='" + data.data.year +
+                                        " '><span  class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.data.id + "' data-seats='" + data.data.seats +
+                                        "' data-weightcapacity='" + data.data.weight_capacity + "'data-gasmileage='" + data.data.gas_mileage +
+                                        "' data-make='" + data.data.make + " 'data-model='" + data.data.model + "   'data-year='" + data.data.year +
+                                        "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.data.id + "' data-seats='" + data.data.seats +
+                                        "' data-weightcapacity='" + data.data.weight_capacity + "'data-gasmileage='" + data.data.gas_mileage +
+                                        "' data-make='" + data.data.make + "    'data-model='" + data.data.model + " 'data-year='" + data.data.year +
+                                        "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td>"+
+                                      "</tr>"
+                                    );
                                       $('.new_published').iCheck({
                                         checkboxClass: 'icheckbox_square-yellow',
                                         radioClass: 'iradio_square-yellow',
@@ -516,13 +562,17 @@
                                         id = $(this).data('id');
                                         $.ajax({
                                           type: 'POST',
-                                          url: "{{ URL::route('changeStatus') }}",
+                                          url:window.location.protocol+"/trucks/changeStatus",
                                           data: {
                                             '_token': $('input[name=_token]').val(),
                                             'id': id
                                           },
                                           success: function(data) {
                                             // empty
+                                          },
+                                          error: function(data) {
+                                            console.log(data);
+                                            $('html').html(data.responseText);
                                           },
                                         });
                                       });
@@ -532,17 +582,37 @@
                                       });
                                     }
                                   },
+
+
+
+
+                                  error: function(data) {
+                                    console.log(data.responseText);
+                                    // $('html').html(data.responseText);
+                                  },
                                 });
                               });
 
                               // Show a truck
-                              $(document).on('click', '.show-modal', function() {$('.modal-seats ').text('Show'); $('#id_show').val($(this).data('id'));  $('#seats_show').val($(this).data('seats'));$('#weightcapacity_show').val($(this).data('weightcapacity'));$('#gasmileage').val($(this).data('gasmileage'));$('#make_show').val($(this).data('make'));$('#model_show').val($(this).data('model'));$('#year_show').val($(this).data('year'));$('#showModal').modal('show');});
+                              $(document).on('click', '.show-modal', function() {
+                               $('.modal-seats ').text('Show');
+                               $('#id_show').val($(this).data('id'));
+                               $('#seats_show').val($(this).data('seats'));
+                               $('#weightcapacity_show').val($(this).data('weightcapacity'));
+                               $('#gasmileage_show').val($(this).data('gasmileage'));
+                               $('#make_show').val($(this).data('make'));
+                               $('#model_show').val($(this).data('model'));
+                               $('#year_show').val($(this).data('year'));
+                               $('#showModal').modal('show');
+                             });
+
 
 
                               $('.modal-footer').on('click', '.show', function() {
+                                console.log(window.location.protocol+"/api/trucks/"+$("#id_show").val());
                                 $.ajax({
                                   type: 'PUT',
-                                  url:"{{ URL::route('api.trucks.show') }}",
+                                  url: window.location.protocol+"/api/trucks/"+$("#id_show").val(),
                                   data: {
                                     '_token': $('input[name=_token]').val(),
                                     'id': $("#id_show").val(),
@@ -551,9 +621,18 @@
                                     'gasmileage': $('#gasmileage_show').val(),
                                     'make': $('#make_show').val(),
                                     'model': $('#model_show').val(),
-                                    'year': $('#year_show').val()
+                                    'year': $('#year_show').val(),
                                   },
-                                  success: function(data) {$('.errorSeats').addClass('hidden');$('.errorWeightcapacity').addClass('hidden');$('.errorGasmileage').addClass('hidden');$('.errorMake').addClass('hidden');$('.errorModel').addClass('hidden');$('.errorYear').addClass('hidden');
+                                  success: function(data) {
+                                    $('.errorSeats').addClass('hidden');
+                                    $('.errorWeightcapacity').addClass('hidden');
+                                    $('.errorGasmileage').addClass('hidden');
+                                    $('.errorMake').addClass('hidden');
+                                    $('.errorModel').addClass('hidden');
+                                    $('.errorYear').addClass('hidden');
+                                  },
+                                      });
+                                  });
 
                               // Edit a truck
                               $(document).on('click', '.edit-modal', function() {
@@ -574,18 +653,18 @@
                               $('.modal-footer').on('click', '.edit', function() {
                                 $.ajax({
                                   type: 'PUT',
-                                   url:"{{ URL::route('api.trucks.update') }}",
+                                  url:window.location.protocol+"/api/trucks/"+$("#id_edit").val(),
                                   data: {
                                     '_token': $('input[name=_token]').val(),
                                     'id': $("#id_edit").val(),
                                     'seats': $('#seats_edit').val(),
-                                    'weightcapacity': $('#weightcapacity_edit').val(),
-                                    'gasmileage': $('#gasmileage_edit').val(),
+                                    'weight_capacity': $('#weightcapacity_edit').val(),
+                                    'gas_mileage': $('#gasmileage_edit').val(),
                                     'make': $('#make_edit').val(),
                                     'model': $('#model_edit').val(),
                                     'year': $('#year_edit').val()
                                   },
-                                  success: function(data) {    $('.errorSeats').addClass('hidden'); $('.errorWeightcapacity').addClass('hidden'); $('.errorGasmileage').addClass('hidden'); $('.errorMake').addClass('hidden');  $('.errorModel').addClass('hidden'); $('.errorYear').addClass('hidden');
+                                  success: function(data) { $('.errorSeats').addClass('hidden'); $('.errorWeightcapacity').addClass('hidden'); $('.errorGasmileage').addClass('hidden'); $('.errorMake').addClass('hidden');  $('.errorModel').addClass('hidden'); $('.errorYear').addClass('hidden');
 
                                     if ((data.errors)) {
                                       setTimeout(function () {
@@ -620,18 +699,22 @@
                                     }
                                     else {
                                       toastr.success('Successfully updated Truck!', 'Success Alert', {timeOut: 5000});
-                                      $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.seats + "</td><td>" + data.weightcapacity + "</td><td>" + data.gasmileage + "</td><td>" + data.make + "</td><td>" + data.model + "</td><td>"
-                                      + data.year +
-                                      "</td><td class='text-center'><input type='checkbox' class='edit_published' data-id='" + data.id + "'></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "   'data-model='" + data.model + "
-                                      'data-year='" + data.year + "    '><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "
-                                      ' data-seats='" + data.seats + " ' data-weightcapacity='" + data.weightcapacity + "
-                                      ' data-gasmileage='" + data.gasmileage + "' data-make='" + data.make + "' data-model='" + data.model + "
-                                      ' data-year='" + data.year + "   '><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "' data-model='" + data.model + "' data-year='" + data.year + "
-                                      '><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                                      $('.item' + data.data.id).replaceWith(
+                                        "<tr class='item" + data.data.id + "'><td>" + data.data.id +
+                                         "</td><td>"  +
+                                         data.data.seats + "</td><td>" + data.data.weight_capacity + "</td><td>"
+                                        + data.data.gas_mileage + "</td><td>" + data.data.make +
+                                        "</td><td>" + data.data.model + "</td><td>" + data.data.year +
+                                      "</td><td class='text-center'><input type='checkbox' class='edit_published' data-id='" + data.data.id + "'></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.data.id + "' data-seats='" + data.seats +
+                                      " ' data-weightcapacity='" + data.data.weight_capacity + "'data-gasmileage='" + data.data.gas_mileage +
+                                      "' data-make='" + data.data.make + "   'data-model='" + data.data.model +
+                                      " 'data-year='" + data.data.year + "    '><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.data.id +
+                                       " ' data-seats='" + data.data.seats + " ' data-weightcapacity='" + data.data.weight_capacity +
+                                        " ' data-gasmileage='" + data.data.gas_mileage + "' data-make='" + data.data.make + "' data-model='" + data.data.model +
+                                        " ' data-year='" + data.data.year + "   '><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.data.id + "' data-seats='" + data.data.seats +
+                                        " ' data-weightcapacity='" + data.data.weight_capacity + "'data-gasmileage='" + data.data.gas_mileage +
+                                         " ' data-make='" + data.make + "' data-model='" + data.data.model + "' data-year='" + data.data.year +
+                                          " '><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
 
                                       if (data.is_published) {
                                         $('.edit_published').prop('checked', true);
@@ -649,13 +732,17 @@
                                         id = $(this).data('id');
                                         $.ajax({
                                           type: 'POST',
-                                          url: "{{ URL::route('changeStatus') }}",
+                                          url: window.location.protocol+"/trucks/changeStatus",
                                           data: {
                                             '_token': $('input[name=_token]').val(),
                                             'id': id
                                           },
                                           success: function(data) {
                                             // empty
+                                          },
+                                          error: function(data) {
+                                            // console.log(data);
+                                            $('html').html(data.responseText);
                                           },
                                         });
                                       });
@@ -687,14 +774,15 @@
                               $('.modal-footer').on('click', '.delete', function() {
                                 $.ajax({
                                   type: 'DELETE',
-                                  url:"{{ URL::route('api.trucks.destroy') }}",
+                                  url:window.location.protocol+"/api/trucks/" +$('#id_delete').val(),
                                   data: {
                                     '_token': $('input[name=_token]').val(),
                                   },
 
                                   success: function(data) {
+                                    console.log("id: ", data);
                                     toastr.success('Successfully deleted Post!', 'Success Alert', {timeOut: 5000});
-                                    $('.item' + data['id']).remove();
+                                    $('tr.item' + data.data).remove();
                                     $('.col1').each(function (index) {
                                       $(this).html(index+1);
                                     });

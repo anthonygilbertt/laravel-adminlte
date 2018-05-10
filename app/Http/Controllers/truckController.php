@@ -1,15 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-
-// from the article
 use Illuminate\Support\Facades\Input;
-
-use Validator;
-use Response;
-use App\Post;
-use View;
-
-// end of article
 
 use App\Http\Requests\CreatetruckRequest;
 use App\Http\Requests\UpdatetruckRequest;
@@ -18,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
+use app\Models\truck;
 
 
 class truckController extends AppBaseController
@@ -34,7 +26,7 @@ class truckController extends AppBaseController
     {
       $id = Input::get('id');
 
-      $truck = Truk::findOrFail($id);
+      $truck = Truck::findOrFail($id);
       $truck->favorite = !$truck->favorite;
       $truck->save();
 
@@ -51,10 +43,9 @@ class truckController extends AppBaseController
     {
         $this->truckRepository->pushCriteria(new RequestCriteria($request));
         $trucks = $this->truckRepository->all();
-        //return view('trucks.index')
+
         return view('trucks.index')
             ->with('trucks', $trucks);
-        //return view('home', ['trucks' =>$trucks]);
     }
     /**
      * Show the form for creating a new truck.
@@ -63,8 +54,6 @@ class truckController extends AppBaseController
     public function create()
     {
         return view('trucks.create');
-        //return view('vendor.home');
-        //return view('home', ['trucks' =>$trucks]);
     }
 
     /**
@@ -77,9 +66,7 @@ class truckController extends AppBaseController
         $input = $request->all();
         $truck = $this->truckRepository->create($input);
         Flash::success('Truck saved successfully.');
-        return redirect(route('trucks.index'));
-        //return redirect(route('vendor.home'));
-        //return view('home', ['trucks' =>$trucks]);
+        return redirect(route('trucks.post'));
     }
 
     /**
@@ -89,7 +76,6 @@ class truckController extends AppBaseController
      */
     public function show($id)
     {
-
         $truck = $this->truckRepository->findWithoutFail($id);
 
         if (empty($truck))
@@ -97,11 +83,8 @@ class truckController extends AppBaseController
             Flash::error('Truck not found');
 
             return redirect(route('trucks.index'));
-            //return redirect(route('vendor.home'));
           }
         return view('trucks.show')->with('truck', $truck);
-        //return view('trucks.index')->with('truck', $truck);
-        //return view('vendor.home')->with('truck', $truck);
     }
 
     /**
@@ -117,10 +100,8 @@ class truckController extends AppBaseController
         {
             Flash::error('Truck not found');
             return redirect(route('trucks.index'));
-            //return redirect(route('vendor.home'));
         }
         return view('trucks.edit')->with('truck', $truck);
-        //return view('vendor.home')->with('truck', $truck);
     }
 
       /**
@@ -143,7 +124,6 @@ class truckController extends AppBaseController
         $truck = $this->truckRepository->update($request->all(), $id);
         Flash::success('Truck updated successfully.');
         return redirect(route('trucks.index'));
-        //return redirect(route('vendor.home'));
     }
     /**
      * Remove the specified truck from storage.     *
@@ -157,11 +137,9 @@ class truckController extends AppBaseController
          {
             Flash::error('Truck not found');
             return redirect(route('trucks.index'));
-            //return redirect(route('vendor.home'));
           }
         $this->truckRepository->delete($id);
         Flash::success('Truck deleted successfully.');
         return redirect(route('trucks.index'));
-        //return redirect(route('vendor.home'));
     }
 }

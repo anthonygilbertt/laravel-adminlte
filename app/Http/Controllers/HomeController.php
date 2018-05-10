@@ -22,10 +22,14 @@ class HomeController extends Controller
       //$trucks = Truck::all();
       //return view('trucks.index',['trucks' => $trucks]);
 
-      $trucks = Truck::all();
+      $trucks = Truck::orderBy('favorite', 'DESC')
+      ->orderBy('make', 'ASC')
+      ->orderBy('model', 'ASC')
+      ->get();
       return view('home', ['trucks' => $trucks]);
 
       //  original   return view('home');
       //return view('home')->with('truck', $truck);
     }
+
 }
