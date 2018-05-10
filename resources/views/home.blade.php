@@ -653,18 +653,18 @@
                               $('.modal-footer').on('click', '.edit', function() {
                                 $.ajax({
                                   type: 'PUT',
-                                   url:"{{ URL::route('api.trucks.update') }}",
+                                  url:window.location.protocol+"/api/trucks/"+$("#id_edit").val(),
                                   data: {
                                     '_token': $('input[name=_token]').val(),
                                     'id': $("#id_edit").val(),
                                     'seats': $('#seats_edit').val(),
-                                    'weightcapacity': $('#weightcapacity_edit').val(),
-                                    'gasmileage': $('#gasmileage_edit').val(),
+                                    'weight_capacity': $('#weightcapacity_edit').val(),
+                                    'gas_mileage': $('#gasmileage_edit').val(),
                                     'make': $('#make_edit').val(),
                                     'model': $('#model_edit').val(),
                                     'year': $('#year_edit').val()
                                   },
-                                  success: function(data) {    $('.errorSeats').addClass('hidden'); $('.errorWeightcapacity').addClass('hidden'); $('.errorGasmileage').addClass('hidden'); $('.errorMake').addClass('hidden');  $('.errorModel').addClass('hidden'); $('.errorYear').addClass('hidden');
+                                  success: function(data) { $('.errorSeats').addClass('hidden'); $('.errorWeightcapacity').addClass('hidden'); $('.errorGasmileage').addClass('hidden'); $('.errorMake').addClass('hidden');  $('.errorModel').addClass('hidden'); $('.errorYear').addClass('hidden');
 
                                     if ((data.errors)) {
                                       setTimeout(function () {
@@ -699,18 +699,22 @@
                                     }
                                     else {
                                       toastr.success('Successfully updated Truck!', 'Success Alert', {timeOut: 5000});
-                                      $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.seats + "</td><td>" + data.weightcapacity + "</td><td>" + data.gasmileage + "</td><td>" + data.make + "</td><td>" + data.model + "</td><td>"
-                                      + data.year +
-                                      "</td><td class='text-center'><input type='checkbox' class='edit_published' data-id='" + data.id + "'></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "   'data-model='" + data.model + "
-                                      'data-year='" + data.year + "    '><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "
-                                      ' data-seats='" + data.seats + " ' data-weightcapacity='" + data.weightcapacity + "
-                                      ' data-gasmileage='" + data.gasmileage + "' data-make='" + data.make + "' data-model='" + data.model + "
-                                      ' data-year='" + data.year + "   '><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "' data-model='" + data.model + "' data-year='" + data.year + "
-                                      '><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                                      $('.item' + data.data.id).replaceWith(
+                                        "<tr class='item" + data.data.id + "'><td>" + data.data.id +
+                                         "</td><td>"  +
+                                         data.data.seats + "</td><td>" + data.data.weight_capacity + "</td><td>"
+                                        + data.data.gas_mileage + "</td><td>" + data.data.make +
+                                        "</td><td>" + data.data.model + "</td><td>" + data.data.year +
+                                      "</td><td class='text-center'><input type='checkbox' class='edit_published' data-id='" + data.data.id + "'></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.data.id + "' data-seats='" + data.seats +
+                                      " ' data-weightcapacity='" + data.data.weight_capacity + "'data-gasmileage='" + data.data.gas_mileage +
+                                      "' data-make='" + data.data.make + "   'data-model='" + data.data.model +
+                                      " 'data-year='" + data.data.year + "    '><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.data.id +
+                                       " ' data-seats='" + data.data.seats + " ' data-weightcapacity='" + data.data.weight_capacity +
+                                        " ' data-gasmileage='" + data.data.gas_mileage + "' data-make='" + data.data.make + "' data-model='" + data.data.model +
+                                        " ' data-year='" + data.data.year + "   '><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.data.id + "' data-seats='" + data.data.seats +
+                                        " ' data-weightcapacity='" + data.data.weight_capacity + "'data-gasmileage='" + data.data.gas_mileage +
+                                         " ' data-make='" + data.make + "' data-model='" + data.data.model + "' data-year='" + data.data.year +
+                                          " '><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
 
                                       if (data.is_published) {
                                         $('.edit_published').prop('checked', true);
