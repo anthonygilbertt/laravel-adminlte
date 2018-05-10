@@ -469,18 +469,20 @@
                                 $('#addModal').modal('show');
                               });
                               $('.modal-footer').on('click', '.add', function() {
+                                console.log("seats: ",$('#seat_add').val());
                                 $.ajax({
                                   type: 'POST',
-                                  url:"{{ URL::route('api.trucks.store') }}",
+                                  url:window.location.protocol+"api/trucks",
                                   data: {
                                     '_token': $('input[name=_token]').val(),
 
-                                    'seats': $('#seats_add').val(),
-                                    'weightcapacity': $('#weightcapacity_add').val(),
-                                    'gasmileage': $('#gasmileage_add').val(),
+                                    'seats': $('#seat_add').val(),
+                                    'weight_capacity': $('#weightcapacity_add').val(),
+                                    'gas_mileage': $('#gasmileage_add').val(),
                                     'make': $('#make_add').val(),
                                     'model': $('#model_add').val(),
                                     'year': $('#year_add').val(),
+                                    'favorite': null,
                                   },
                                   success: function(data) {
                                     $('.errorSeats').addClass('hidden');
@@ -491,10 +493,8 @@
                                     $('.errorYear').addClass('hidden');
 
                                     if ((data.errors)) {
-                                      setTimeout(function () {
                                         $('#addModal').modal('show');
                                         toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
-                                      } 500);
 
                                       if (data.errors.seats) {
                                         $('.errorSeats').removeClass('hidden');
@@ -520,20 +520,36 @@
                                         $('.errorYear').removeClass('hidden');
                                         $('.errorYear').text(data.errors.year);
                                       }
+
+                                      console.log("server error response", data);
+
                                     } else {
+                                      console.log("server response", data);
                                       toastr.success('Successfully added Truck!', 'Success Alert', {timeOut: 5000});
-                                      $('#postTable').append("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.seats + "</td><td>" + data.weightcapacity
-                                      + "</td><td>" + data.gasmileage + "</td><td>" + data.make  + "</td><td>" + data.model   + "</td><td>" + data.year
-                                      + "</td><td class='text-center'><input type='checkbox' class='new_published' data-id='" + data.id + " '></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity +   "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "   'data-model='" + data.model + "  'data-year='" + data.year + "
-                                      '><span  class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + " 'data-model='" + data.model + "   'data-year='" + data.year + "
-                                      '><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-seats='" + data.seats + "
-                                      ' data-weightcapacity='" + data.weightcapacity + "'data-gasmileage='" + data.gasmileage + "
-                                      ' data-make='" + data.make + "    'data-model='" + data.model + " 'data-year='" + data.year + "
-                                      '><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                                      $('#postTable').append(
+                                        "<tr class='item" + data.id + "'>"+
+                                        "<td>" + data.data.id + "</td>"+
+                                        "<td>" + data.data.seats + "</td>"+
+                                        "<td>" + data.data.weight_capacity+ "</td>"+
+                                        "<td>" + data.data.gas_mileage + "</td>"+
+                                        "<td>" + data.data.make  + "</td>"+
+                                        "<td>" + data.data.model   + "</td>"+
+                                        "<td>" + data.data.year+ "</td>"+
+                                        "<td class='text-center'><input type='checkbox' class='new_published' data-id='" + data.data.id + " '></td>"+
+                                        "<td>Right now</td>"+
+                                        "<td><button class='show-modal btn btn-success' data-id='" + data.data.id + "' data-seats='" + data.data.seats +
+                                        "' data-weightcapacity='" + data.data.weight_capacity +
+                                          "'data-gasmileage='" + data.data.gas_mileage +
+                                        "' data-make='" + data.data.make + "   'data-model='" + data.data.model + "  'data-year='" + data.data.year +
+                                        " '><span  class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.data.id + "' data-seats='" + data.data.seats +
+                                        "' data-weightcapacity='" + data.data.weight_capacity + "'data-gasmileage='" + data.data.gas_mileage +
+                                        "' data-make='" + data.data.make + " 'data-model='" + data.data.model + "   'data-year='" + data.data.year +
+                                        "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.data.id + "' data-seats='" + data.data.seats +
+                                        "' data-weightcapacity='" + data.data.weight_capacity + "'data-gasmileage='" + data.data.gas_mileage +
+                                        "' data-make='" + data.data.make + "    'data-model='" + data.data.model + " 'data-year='" + data.data.year +
+                                        "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td>"+
+                                      "</tr>"
+                                    );
                                       $('.new_published').iCheck({
                                         checkboxClass: 'icheckbox_square-yellow',
                                         radioClass: 'iradio_square-yellow',
