@@ -52,8 +52,25 @@
     vertical-align: baseline;
   }
   /* icheck checkboxes */
-  .iradio_flat-yellow {
-    background: url(https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/yellow.png) no-repeat;
+  .icheckbox_square-yellow {
+    background: url(https://i.pinimg.com/originals/f0/49/f0/f049f04d36f739137c2fcab4bb3905a7.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  .icheckbox_square-yellow.checked {
+    background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Full_Star_Red.svg/64px-Full_Star_Red.svg.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  .icheckbox_square-yellow.hover {
+    background: url(https://i.pinimg.com/originals/f0/49/f0/f049f04d36f739137c2fcab4bb3905a7.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  .icheckbox_square-yellow.checked.hover {
+    background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Full_Star_Red.svg/64px-Full_Star_Red.svg.png) no-repeat;
+    background-position: center;
+    background-size: contain;
   }
   </style>
 
