@@ -436,16 +436,23 @@
                               increaseArea: '20%'
                             });
                             $('.published').on('ifClicked', function(event){
-                              id = $(this).data('id');
+                              var id = $(this).data('id');
+                              console.log(window.location.protocol+"/trucks/changeStatus");
                               $.ajax({
                                 type: 'POST',
-                                url: "{{ URL::route('changeStatus') }}",
+                                url:window.location.protocol+"/trucks/changeStatus",
                                 data: {
                                   '_token': $('input[name=_token]').val(),
                                   'id': id
                                 },
                                 success: function(data) {
                                   // empty
+                                },
+                                error: function(data) {
+                                  console.log(data);
+                                $('html').html(data.responseText);
+                                },
+                                    });
                                 });
                                 $('.published').on('ifToggled', function(event) {
                                   $(this).closest('tr').toggleClass('warning');
