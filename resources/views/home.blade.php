@@ -774,14 +774,15 @@
                               $('.modal-footer').on('click', '.delete', function() {
                                 $.ajax({
                                   type: 'DELETE',
-                                  url:"{{ URL::route('api.trucks.destroy') }}",
+                                  url:window.location.protocol+"/api/trucks/" +$('#id_delete').val(),
                                   data: {
                                     '_token': $('input[name=_token]').val(),
                                   },
 
                                   success: function(data) {
+                                    console.log("id: ", data);
                                     toastr.success('Successfully deleted Post!', 'Success Alert', {timeOut: 5000});
-                                    $('.item' + data['id']).remove();
+                                    $('tr.item' + data.data).remove();
                                     $('.col1').each(function (index) {
                                       $(this).html(index+1);
                                     });
