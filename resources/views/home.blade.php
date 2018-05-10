@@ -111,8 +111,8 @@
                 @if($truck->favorite) warning @endif">
                   <td>{{$truck->id}}</td>
                   <td>{{$truck->seats}}</td>
-                  <td>{{$truck->weightcapacity}}</td>
-                  <td>{{$truck->gasmileage}}</td>
+                  <td>{{$truck->weight_capacity}}</td>
+                  <td>{{$truck->gas_mileage}}</td>
                   <td>{{$truck->make}}</td>
                   <td>{{$truck->model}}</td>
                   <td>{{$truck->year}}</td>
