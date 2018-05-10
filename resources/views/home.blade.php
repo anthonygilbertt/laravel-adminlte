@@ -347,66 +347,71 @@
 
                     <!-- Modal form to delete a form -->
                     <div id="deleteModal" class="modal fade" role="dialog">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">×</button>
-                            <h4 class="modal-seats"></h4>
-                          </div>
-                          <div class="modal-body">
-                            <h3 class="text-center">Are you sure you want to delete the following truck?</h3>
-                            <br />
-                            <form class="form-horizontal" role="form">
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="id">ID:</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="id_delete" disabled>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title">Delete</h4>
                                 </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="seats">Seats:</label>
-                                <div class="col-sm-10">
-                                  <input type="number" class="form-control" id="seats_delete" disabled>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="weightcapacity">Weight Capacity:</label>
-                                <div class="col-sm-10">
-                                  <input type="number" class="form-control" id="weightcapacity_delete" disabled>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="gasmileage">Gas Mileage:</label>
-                                <div class="col-sm-10">
-                                  <input type="number" class="form-control" id="gasmileage_delete" disabled></div>
-                                </div>
-                                <div class="form-group">
-                                  <label class="control-label col-sm-2" for="make">Make:</label>
-                                  <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="make_delete" disabled></div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label class="control-label col-sm-2" for="model">Model:</label>
-                                    <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="model_delete" disabled></div>
+                                <div class="modal-body">
+                                    <h3 class="text-center">Are you sure you want to delete the following post?</h3>
+                                    <br />
+                                    <form class="form-horizontal" role="form">
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="id">ID:</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="id_delete" disabled>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="seats">Seats:</label>
+                                        <div class="col-sm-10">
+                                          <input type="number" class="form-control" id="seats_delete" disabled>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="weightcapacity">Weight Capacity:</label>
+                                        <div class="col-sm-10">
+                                          <input type="number" class="form-control" id="weightcapacity_delete" disabled>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="gasmileage">Gas Mileage:</label>
+                                        <div class="col-sm-10">
+                                          <input type="number" class="form-control" id="gasmileage_delete" disabled>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="make">Make:</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="make_delete" disabled>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-2" for="model">Model:</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="model_delete" disabled>
+                                        </div>
+                                      </div>
+                                        <div class="form-group">
+                                          <label class="control-label col-sm-2" for="year">Year:</label>
+                                          <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="year_delete" disabled>
+                                          </div>
+                                        </div>
+                                    </form>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger delete" data-dismiss="modal">
+                                            <span id="" class='glyphicon glyphicon-trash'></span> Delete
+                                        </button>
+                                        <button type="button" class="btn btn-warning" data-dismiss="modal">
+                                            <span class='glyphicon glyphicon-remove'></span> Close
+                                        </button>
                                     </div>
-                                    <div class="form-group">
-                                      <label class="control-label col-sm-2" for="year">Year:</label>
-                                      <div class="col-sm-10"><input type="text" class="form-control" id="year_delete" disabled></div>
-                                    </div>
-                                  </form>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger delete" data-dismiss="modal">
-                                      <span id="" class='glyphicon glyphicon-trash'></span> Delete
-                                    </button>
-                                    <button type="button" class="btn btn-warning" data-dismiss="modal">
-                                      <span class='glyphicon glyphicon-remove'></span> Close
-                                    </button>
-                                  </div>
                                 </div>
-                              </div>
                             </div>
-                          </div>
+                        </div>
+                    </div>
 
                           <!-- jQuery -->
                           <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
