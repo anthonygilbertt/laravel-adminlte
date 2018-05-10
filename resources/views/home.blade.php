@@ -273,7 +273,8 @@
                     </div>
                   </div>
                 </div>
-
+              </div>
+            </div>
                 {{-- <!-- Modal form to edit a form --> --}}
                 <div id="editModal" class="modal fade" role="dialog">
                   <div class="modal-dialog">
