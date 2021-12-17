@@ -9,17 +9,21 @@
 
 ## setup
 
-  - `docker-compose up --build -d`
+- `docker-compose up --build -d`
 
-  - `docker exec -it laraveladminlte_backend_1 bash`
+- `docker exec -it laraveladminlte_backend_1 bash`
 
-  - `composer install`
+- `composer install`
 
-  - `php artisan migrate`
+- `php artisan migrate`
+
+- `php artisan key:generate`
+
+Next: Create a .env file
 
 ### To create new CRUD API and Web Backend list item
 
-  - `php artisan imfyom:api_scaffold $model_name_table_name`
+- `php artisan imfyom:api_scaffold $model_name_table_name`
 
 ## About Laravel
 
